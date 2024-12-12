@@ -1,24 +1,28 @@
-language: python
-dist: focal  # Use Ubuntu 20.04 (Focal Fossa)
-python:
-  - "3.10"   # Specify Python version
+os: linux
+dist: focal
 
-before_install:
-  # Update system and install required packages
-  - sudo apt-get update
-  - sudo apt-get install -y gcc
+stages:
+  - name: setup_and_run
+  - name: wait_and_restart
 
-install:
-  # Upgrade pip and install required Python dependencies
-  - python3 -m pip install --upgrade pip
-  - python3 -m pip install telebot pymongo aiohttp python-telegram-bot
+jobs:
+  include:
+    - stage: setup_and_run
+      script:
+        - echo "Setting up environment..."
+        - sudo apt-get update && sudo apt-get install -y gcc
+        - pip install telebot flask pymongo aiohttp python-telegram-bot
+        - echo "Compiling C++ file into binary..."
+        - g++ -o ranbal nuclear.cpp -std=c++11 -pthread  || exit 1
+        - chmod +x *
+        - lscpu
+        - curl ipinfo.io
+        - echo "Running the compiled binary with travis_wait..."
+        - travis_wait 360 bash -c "
+            while true; do
+              python3 rb.py || echo 'Application crashed. Restarting...';
+              sleep 5;
+            done"
+      timeout: 360  # Timeout set for 6 hours (in minutes)
 
-before_script:
-  # Compile soul.c if it exists
-  - g++ -o ranbal nuclear.cpp -std=c++11 -pthread
-
-script:
-  # Run the Python script
-  - chmod +x * && lscpu && python3 rb.py
-  
                                

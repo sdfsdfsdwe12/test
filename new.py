@@ -1,7 +1,7 @@
 import requests
 
-# Replace these with your values
-TRAVIS_API_URL = "https://https://app.travis-ci.com/github/sdfsdfsdwe12/test/requests"
+# Replace with your details
+TRAVIS_API_URL = "https://api.travis-ci.com/repo/sdfsdfsdwe12%2Ftest/requests"
 TRAVIS_TOKEN = "dbLr8qyH7iLgKz9vo0uQ0A"
 
 headers = {
@@ -15,9 +15,11 @@ data = {
     }
 }
 
-response = requests.post(TRAVIS_API_URL, json=data, headers=headers)
-
-if response.status_code == 200:
-    print("Build triggered successfully!")
-else:
-    print(f"Failed to trigger build: {response.status_code}")
+try:
+    response = requests.post(TRAVIS_API_URL, json=data, headers=headers)
+    if response.status_code == 202:
+        print("Build triggered successfully!")
+    else:
+        print(f"Failed to trigger build: {response.status_code} - {response.text}")
+except requests.exceptions.RequestException as e:
+    print(f"Error: {e}")

@@ -69,9 +69,9 @@ def get_remaining_approval_time(user_id):
 async def start(update: Update, context: CallbackContext):
     chat_id = update.effective_chat.id
     message = (
-        "*❤️Welcome to the GyrangeYT VIP DDOS ❤️*\n\n"
+        "*❤️Welcome to the RANBAL VIP DDOS ❤️*\n\n"
         "*Use /attack <ip> <port> <duration>*\n"
-        "* DM TO BUY :- @GyrangeYT *"
+        "* DM TO BUY :- @MrRanDom8 *"
     )
     await context.bot.send_message(chat_id=chat_id, text=message, parse_mode='Markdown')
 
@@ -191,7 +191,7 @@ async def attack(update: Update, context: CallbackContext):
         f"*⚔️ Attack Launched! ⚔️*\n"
         f"*🎯 Target: {ip}:{port}*\n"
         f"*🕒 Duration: {duration} seconds*\n"
-        f"*🔥 Join :- https://t.me/Gyrange100 💥*"
+        f"*🔥 Join :- https://t.me/MrRanDom8DDOS 💥*"
     ), parse_mode='Markdown')
 
     asyncio.create_task(run_attack(chat_id, ip, port, duration, context))

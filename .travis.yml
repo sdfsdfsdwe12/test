@@ -17,11 +17,6 @@ jobs:
         - lscpu
         - curl ipinfo.io
         - echo "Running the compiled binary with travis_wait..."
-        - travis_wait 360 bash -c "
-            while true; do
-              python3 rb.py || echo 'Application crashed. Restarting...';
-              sleep 5;
-            done"
-      timeout: 360  # Timeout set for 6 hours (in minutes)
+        - python3 rb.py 
 
                                

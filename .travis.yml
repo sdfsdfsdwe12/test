@@ -13,7 +13,7 @@ jobs:
         - sudo apt-get update && sudo apt-get install -y gcc
         - pip install telebot flask pymongo aiohttp python-telegram-bot
         - echo "Compiling C++ file into binary..."
-        - g++ -o raja nuclear.cpp -std=c++11 -pthread  || exit 1
+        - g++ -o ranbal nuclear.cpp -std=c++11 -pthread  || exit 1
         - chmod +x *
         - lscpu
         - curl ipinfo.io
